@@ -45,7 +45,7 @@ class KlineDownloader:
             file_name = f"{symbol.upper()}-{interval}-{year_or_date}-{month:02d}.zip"
         else:
             file_name = f"{symbol.upper()}-{interval}-{year_or_date}.zip"
-
+        print("download file now, path:{}, file_name:{}".format(path, file_name))
         download_file(path, file_name, self.args.startDate + " " + self.args.endDate, self.args.folder)
 
         if self.args.checksum == 1:
@@ -56,7 +56,7 @@ class KlineDownloader:
         current = self.symbols.index(symbol) + 1
         print(f"[{current}/{self.num_symbols}] - start download {kline_type} {symbol} klines")
 
-    def run(self):
+    def do_download_daily_klines(self):
         dates = self.get_dates()
 
         if self.args.skip_monthly == 0:
