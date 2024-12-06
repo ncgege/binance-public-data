@@ -33,7 +33,9 @@ if __name__ == "__main__":
         interval = sys.argv[2]
     # 获取今天的日期
     if symbol.upper() == 'ALL':
-        symbol = SYMBOL_LIST
+        symbol_list = SYMBOL_LIST
+    else:
+        symbol_list = [symbol.upper()]
     print("symbol:{}".format(symbol))
     today = datetime.now()
     keep_count = 50
@@ -43,13 +45,14 @@ if __name__ == "__main__":
     # 将日期格式化为字符串
     startDate = startDate.strftime("%Y-%m-%d")
     endDate = today.strftime("%Y-%m-%d")
-    arg_list = ['-t', 'um',
-                '-s', f'{symbol}',
-                '-i', f'{interval}',
-                '-skip-monthly', '1',
-                '-startDate', f'{startDate}',
-                '-endDate', f'{endDate}']
+    for s in symbol_list:
+        arg_list = ['-t', 'um',
+                    '-s', f'{s}',
+                    '-i', f'{interval}',
+                    '-skip-monthly', '1',
+                    '-startDate', f'{startDate}',
+                    '-endDate', f'{endDate}']
 
-    args = parser.parse_args(arg_list)
-    downloader = KlineDownloader(args)
-    downloader.do_download_daily_klines()
+        args = parser.parse_args(arg_list)
+        downloader = KlineDownloader(args)
+        downloader.do_download_daily_klines()
