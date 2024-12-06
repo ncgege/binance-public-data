@@ -5,6 +5,20 @@ from utility import get_parser
 from datetime import datetime, timedelta
 
 
+def get_days_ago(_interval, _keep_count):
+    time_diffs = {
+        "3m": 180 * _keep_count,
+        "5m": 300 * _keep_count,
+        "15m": 900 * _keep_count,
+        "4h": 14400 * _keep_count,
+        "1d": 86400 * _keep_count
+    }
+    _time_diff = time_diffs.get(_interval, 0)
+    _days_ago = int(_time_diff / 86400 + 1)
+    _days_ago = _days_ago if _days_ago >= 2 else 2
+    return _days_ago
+
+
 if __name__ == "__main__":
     parser = get_parser('klines')
     if len(sys.argv) != 3:
@@ -18,11 +32,13 @@ if __name__ == "__main__":
         interval = sys.argv[2]
     # 获取今天的日期
     today = datetime.now()
+    keep_count = 50
+    days_ago = get_days_ago(_interval=interval, _keep_count=keep_count)
     # 获取52天前的日期
     startDate = today - timedelta(days=52)
     # 将日期格式化为字符串
-    endDate = today.strftime("%Y-%m-%d")
     startDate = startDate.strftime("%Y-%m-%d")
+    endDate = today.strftime("%Y-%m-%d")
     arg_list = ['-t', 'um',
                 '-s', f'{symbol}',
                 '-i', f'{interval}',
