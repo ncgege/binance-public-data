@@ -3,6 +3,7 @@ import sys
 from kline_downloader import KlineDownloader
 from utility import get_parser
 from datetime import datetime, timedelta
+from config import SYMBOL_LIST
 
 
 def get_days_ago(_interval, _keep_count):
@@ -31,6 +32,8 @@ if __name__ == "__main__":
         symbol = sys.argv[1]
         interval = sys.argv[2]
     # 获取今天的日期
+    if symbol.upper() == 'ALL':
+        symbol = SYMBOL_LIST
     today = datetime.now()
     keep_count = 50
     days_ago = get_days_ago(_interval=interval, _keep_count=keep_count)
