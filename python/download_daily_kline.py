@@ -9,9 +9,9 @@ if __name__ == "__main__":
     parser = get_parser('klines')
     if len(sys.argv) != 3:
         print("""
-        参数个数{}少于指定个数8，程序使用方式：
+        参数个数{}少于指定个数2，程序使用方式：
         python3 download_daily_kline.py BTCUSDT 1d
-        """.format(len(sys.argv)))
+        """.format(len(sys.argv) - 1))
         exit()
     else:
         symbol = sys.argv[1]
