@@ -35,7 +35,7 @@ if __name__ == "__main__":
     keep_count = 50
     days_ago = get_days_ago(_interval=interval, _keep_count=keep_count)
     # 获取52天前的日期
-    startDate = today - timedelta(days=52)
+    startDate = today - timedelta(days=days_ago)
     # 将日期格式化为字符串
     startDate = startDate.strftime("%Y-%m-%d")
     endDate = today.strftime("%Y-%m-%d")
