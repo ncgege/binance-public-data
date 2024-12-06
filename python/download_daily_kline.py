@@ -52,7 +52,6 @@ if __name__ == "__main__":
                     '-skip-monthly', '1',
                     '-startDate', f'{startDate}',
                     '-endDate', f'{endDate}']
-
         args = parser.parse_args(arg_list)
         downloader = KlineDownloader(args)
         downloader.do_download_daily_klines()
