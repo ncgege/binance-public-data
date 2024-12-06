@@ -3,6 +3,7 @@ import sys
 from kline_downloader import KlineDownloader
 from utility import get_parser
 from datetime import datetime, timedelta
+import time
 from config import SYMBOL_LIST
 
 
@@ -55,3 +56,4 @@ if __name__ == "__main__":
         args = parser.parse_args(arg_list)
         downloader = KlineDownloader(args)
         downloader.do_download_daily_klines()
+        time.sleep(1)
