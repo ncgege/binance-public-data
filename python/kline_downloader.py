@@ -13,7 +13,6 @@ class KlineDownloader:
         self.num_symbols = len(self.symbols)
         self.date_range = self.args.startDate + " " + self.args.endDate
         self.start_date, self.end_date = get_start_end_date_objects(self.date_range)
-        print(type(self.start_date), type(self.end_date))
 
     def get_symbols(self):
         if not self.args.symbols:

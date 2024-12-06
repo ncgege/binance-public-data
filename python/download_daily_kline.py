@@ -11,7 +11,8 @@ if __name__ == "__main__":
         参数个数{}少于指定个数8，程序使用方式：
         python3 download_daily_kline.py -t um -s XRPUSDT  -i 1d -skip-monthly 1 -startDate 2024-10-01 -endDate 2024-12-06
         """.format(len(sys.argv)))
+    print(sys.argv[1:])
+    exit()
     args = parser.parse_args(sys.argv[1:])
     downloader = KlineDownloader(args)
-    print(args)
     downloader.do_download_daily_klines()
