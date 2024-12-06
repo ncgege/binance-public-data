@@ -34,6 +34,7 @@ if __name__ == "__main__":
     # 获取今天的日期
     if symbol.upper() == 'ALL':
         symbol = SYMBOL_LIST
+    print("symbol:{}".format(symbol))
     today = datetime.now()
     keep_count = 50
     days_ago = get_days_ago(_interval=interval, _keep_count=keep_count)
