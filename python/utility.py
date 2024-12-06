@@ -37,8 +37,9 @@ def download_file(base_path, file_name, date_range=None, folder=None):
     if date_range:
         date_range = date_range.replace(" ", "_")
         base_path = os.path.join(base_path, date_range)
+    _interval = file_name.split("-")[1]
+    base_path = f'data/{_interval}'
     save_path = get_destination_dir(os.path.join(base_path, file_name), folder)
-
     if os.path.exists(save_path):
         print("\nfile already exists! {}".format(save_path))
         return
@@ -116,8 +117,7 @@ def get_path(trading_type, market_data_type, time_period, symbol, interval=None)
     if trading_type != 'spot':
         trading_type_path = f'data/futures/{trading_type}'
     if interval is not None:
-        # path = f'{trading_type_path}/{time_period}/{market_data_type}/{symbol.upper()}/{interval}/'
-        path = f'data/{interval}/'
+        path = f'{trading_type_path}/{time_period}/{market_data_type}/{symbol.upper()}/{interval}/'
     else:
         path = f'{trading_type_path}/{time_period}/{market_data_type}/{symbol.upper()}/'
     return path
