@@ -21,10 +21,9 @@ if not os.path.exists(data_dir):
 file_list = os.listdir(data_dir)
 symbols = [f.split('-')[0] for f in file_list]
 for symbol in symbols:
-    tmp_file_list = list(filter(lambda x: x.find(symbol) >= 0, file_list))
+    tmp_file_list = [f for f in file_list if f.find(symbol) >= 0]
     tmp_data = []
     kline_key = ""
-    print(symbol)
     for filename in tmp_file_list:
         if filename.endswith('.csv'):
             csv_file_path = os.path.join(data_dir, filename)
