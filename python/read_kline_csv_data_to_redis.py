@@ -22,7 +22,6 @@ file_list = os.listdir(data_dir)
 symbols = [f.split('-')[0] for f in file_list]
 for symbol in symbols:
     tmp_file_list = [f for f in file_list if f.find(symbol) >= 0]
-    print(tmp_file_list)
     tmp_data = []
     kline_key = ""
     for filename in tmp_file_list:
@@ -54,5 +53,8 @@ for symbol in symbols:
 
                 # 打印存储的信息（可选）
     print(kline_key)
-    print(f"Stored {tmp_data} to {kline_key}")
+    cur_kline_list = r.lrange(kline_key, 0, -1)
+    tmp_data = sorted(tmp_data, key=lambda x: x['t'])
+    print(cur_kline_list)
+    print(tmp_data)
     exit()
