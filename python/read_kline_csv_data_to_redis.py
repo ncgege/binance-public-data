@@ -29,6 +29,7 @@ r = redis.StrictRedis(host=redis_host, port=redis_port, db=redis_db, decode_resp
 r2 = redis.StrictRedis(host=redis_host, port=6379, db=redis_db, decode_responses=True)
 total = len(symbols)
 cur_count = 0
+print(f"当前读取数据目录：{data_dir}")
 for symbol in symbols:
     tmp_file_list = [f for f in file_list if f.find(symbol) >= 0]
     interval = tmp_file_list[-1].split('-')[1]
