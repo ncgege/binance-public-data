@@ -62,5 +62,6 @@ for symbol in symbols:
     if len(read_data) - len(cur_kline_list) >= KLINE_KEEP_COUNT:
         read_data = read_data[len(read_data) - KLINE_KEEP_COUNT:]
     read_data = [json.dumps(td) for td in read_data]
-    r2.lpush(kline_key, *read_data)
-    exit()
+    if read_data:
+        r2.lpush(kline_key, *read_data)
+        exit()
