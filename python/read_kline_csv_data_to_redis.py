@@ -11,7 +11,7 @@ from settings import KLINE_KEEP_COUNT
 if len(sys.argv) > 1:
     data_dir = sys.argv[1]
 else:
-    data_dir = "data"
+    data_dir = f"{os.getcwd()}/data"
 
 if not os.path.exists(data_dir):
     print(f"目录{data_dir}不存在")
