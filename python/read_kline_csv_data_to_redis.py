@@ -66,4 +66,3 @@ for symbol in symbols:
     if read_data:
         r2.lpush(kline_key, *read_data)
         print(f"数据写入{kline_key}完成。")
-    exit()
