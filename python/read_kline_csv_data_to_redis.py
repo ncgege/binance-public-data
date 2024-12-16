@@ -27,6 +27,8 @@ redis_port = 6380
 redis_db = 0
 r = redis.StrictRedis(host=redis_host, port=redis_port, db=redis_db, decode_responses=True)
 r2 = redis.StrictRedis(host=redis_host, port=6379, db=redis_db, decode_responses=True)
+total = len(symbols)
+cur_count = 0
 for symbol in symbols:
     tmp_file_list = [f for f in file_list if f.find(symbol) >= 0]
     interval = tmp_file_list[-1].split('-')[1]
@@ -64,6 +66,7 @@ for symbol in symbols:
         read_data = read_data[:KLINE_KEEP_COUNT - len(cur_kline_list)]
 
     read_data = [json.dumps(td) for td in read_data]
+    cur_count += 1
     if read_data:
         r2.lpush(kline_key, *read_data)
-        print(f"数据写入{kline_key}完成。")
+        print(f"数据写入{kline_key}完成, 完成进度{cur_count}/{total}")
