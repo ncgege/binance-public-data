@@ -47,13 +47,14 @@ for symbol in symbols:
 
                 # 构造Redis键名
                 kline_key = f"k_list:{symbol}:{interval}"
-                j_data = json.dumps({'t': open_time_ms, 'o': _open, 'h': high, 'l': low, "c": close})
+                j_data = {'t': open_time_ms, 'o': _open, 'h': high, 'l': low, "c": close}
                 # 存储close值到Redis
                 tmp_data.append(j_data)
 
                 # 打印存储的信息（可选）
     print(kline_key)
     cur_kline_list = r.lrange(kline_key, 0, -1)
+    cur_kline_list = [json.loads(kd) for kd in cur_kline_list]
     tmp_data = sorted(tmp_data, key=lambda x: x['t'])
     print(cur_kline_list)
     print(tmp_data)
