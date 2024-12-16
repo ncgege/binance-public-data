@@ -68,3 +68,4 @@ for symbol in symbols:
     if read_data:
         r2.lpush(kline_key + ":test", *read_data)
         print("数据写入redis kline list 完成。")
+    exit()
