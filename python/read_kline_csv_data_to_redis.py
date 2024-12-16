@@ -4,6 +4,7 @@ import sys
 
 import pandas as pd
 import redis
+from settings import KLINE_KEEP_COUNT
 
 
 # 读取CSV文件
@@ -34,7 +35,7 @@ for symbol in symbols:
             redis_port = 6380
             redis_db = 0
             r = redis.StrictRedis(host=redis_host, port=redis_port, db=redis_db, decode_responses=True)
-
+            r2 = redis.StrictRedis(host=redis_host, port=6379, db=redis_db, decode_responses=True)
             # 遍历DataFrame并存储数据到Redis
             for index, row in df.iterrows():
                 open_time = row['open_time']
@@ -46,7 +47,7 @@ for symbol in symbols:
                 low = float(row['low'])
 
                 # 构造Redis键名
-                kline_key = f"k_list:{symbol}:{interval}"
+                kline_key = f"k_list:{symbol}:{interval}:test"
                 j_data = {'t': open_time_ms, 'o': _open, 'h': high, 'l': low, "c": close}
                 # 存储close值到Redis
                 tmp_data.append(j_data)
@@ -56,6 +57,7 @@ for symbol in symbols:
     cur_kline_list = r.lrange(kline_key, 0, -1)
     cur_kline_list = [json.loads(kd) for kd in cur_kline_list]
     tmp_data = sorted(tmp_data, key=lambda x: x['t'])
-    print(cur_kline_list)
-    print(tmp_data)
+    if len(tmp_data) - len(cur_kline_list) >= KLINE_KEEP_COUNT:
+        tmp_data = tmp_data[len(tmp_data) - KLINE_KEEP_COUNT:]
+    r2.lpush(kline_key, *tmp_data)
     exit()
