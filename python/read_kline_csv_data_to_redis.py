@@ -67,6 +67,7 @@ for symbol in symbols:
 
     read_data = [json.dumps(td) for td in read_data]
     cur_count += 1
+    print("完成进度{cur_count}/{total}.")
     if read_data:
         r2.lpush(kline_key, *read_data)
-        print(f"数据写入{kline_key}完成, 完成进度{cur_count}/{total}")
+        print(f"数据写入{kline_key}完成")
