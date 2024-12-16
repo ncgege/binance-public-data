@@ -26,7 +26,8 @@ if __name__ == "__main__":
     if len(sys.argv) != 3:
         print("""
         参数个数{}少于指定个数2，程序使用方式：
-        python3 download_daily_kline.py BTCUSDT 1d
+        如果第一个参数为all则下载SYMBOL_LIST中所有交易对
+        python3 my_kline_downloader.py BTCUSDT 1d
         """.format(len(sys.argv) - 1))
         exit()
     else:
