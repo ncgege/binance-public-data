@@ -39,13 +39,16 @@ def download_file(base_path, file_name, date_range=None, folder=None):
         base_path = os.path.join(base_path, date_range)
     # save_path = get_destination_dir(os.path.join(base_path, file_name), folder)
     _interval = file_name.split("-")[1]
-    save_path = f'data/{_interval}'
-    save_path = os.path.join(save_path, file_name)
+    save_dir = f'data/{_interval}'
+    save_path = os.path.join(save_dir, file_name)
     if os.path.exists(save_path):
         print("\nfile already exists! {}".format(save_path))
         return
 
     # make the directory
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+
     if not os.path.exists(base_path):
         Path(get_destination_dir(base_path)).mkdir(parents=True, exist_ok=True)
 
