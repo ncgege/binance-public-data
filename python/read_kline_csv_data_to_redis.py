@@ -59,5 +59,6 @@ for symbol in symbols:
     tmp_data = sorted(tmp_data, key=lambda x: x['t'])
     if len(tmp_data) - len(cur_kline_list) >= KLINE_KEEP_COUNT:
         tmp_data = tmp_data[len(tmp_data) - KLINE_KEEP_COUNT:]
+    tmp_data = [json.dumps(td) for td in tmp_data]
     r2.lpush(kline_key, *tmp_data)
     exit()
