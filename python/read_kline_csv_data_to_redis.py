@@ -21,6 +21,7 @@ if not os.path.exists(data_dir):
 # 并且保证原来数据+写入数据不超过KLINE_KEEP_COUNT = 50条
 file_list = os.listdir(data_dir)
 symbols = [f.split('-')[0] for f in file_list]
+symbols = list(set(symbols))
 redis_host = 'localhost'
 redis_port = 6380
 redis_db = 0
