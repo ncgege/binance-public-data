@@ -56,7 +56,7 @@ for symbol in symbols:
     print(kline_key)
     cur_kline_list = r.lrange(kline_key, 0, -1)
     cur_kline_list = [json.loads(kd) for kd in cur_kline_list]
-    tmp_data = sorted(tmp_data, key=lambda x: x['t'])
+    tmp_data = sorted(tmp_data, key=lambda x: x['t'], reverse=True)
     if len(tmp_data) - len(cur_kline_list) >= KLINE_KEEP_COUNT:
         tmp_data = tmp_data[len(tmp_data) - KLINE_KEEP_COUNT:]
     tmp_data = [json.dumps(td) for td in tmp_data]
