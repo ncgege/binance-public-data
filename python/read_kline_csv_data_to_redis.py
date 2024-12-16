@@ -33,7 +33,7 @@ for symbol in symbols:
     kline_key = f"k_list:{symbol}:{interval}:test"
     cur_kline_list = r.lrange(kline_key, 0, -1)
     cur_kline_list = [json.loads(kd) for kd in cur_kline_list]
-    cur_timestamp_list = [t for t in cur_kline_list]
+    cur_timestamp_list = [t.get('t') for t in cur_kline_list]
     min_timestamp = min(cur_timestamp_list)
     read_data = []
     for filename in tmp_file_list:
