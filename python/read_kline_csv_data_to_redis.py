@@ -4,7 +4,7 @@ import sys
 
 import pandas as pd
 import redis
-from python.settings import KLINE_KEEP_COUNT
+from settings import KLINE_KEEP_COUNT
 
 
 # 读取CSV文件
