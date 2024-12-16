@@ -22,6 +22,7 @@ file_list = os.listdir(data_dir)
 symbols = [f.split('-')[0] for f in file_list]
 for symbol in symbols:
     tmp_file_list = [f for f in file_list if f.find(symbol) >= 0]
+    print(tmp_file_list)
     tmp_data = []
     kline_key = ""
     for filename in tmp_file_list:
