@@ -30,7 +30,7 @@ for symbol in symbols:
     tmp_file_list = [f for f in file_list if f.find(symbol) >= 0]
     interval = tmp_file_list[-1].split('-')[1]
     # 构造Redis键名
-    kline_key = f"k_list:{symbol}:{interval}:test"
+    kline_key = f"k_list:{symbol}:{interval}"
     cur_kline_list = r.lrange(kline_key, 0, -1)
     cur_kline_list = [json.loads(kd) for kd in cur_kline_list]
     cur_timestamp_list = [t.get('t') for t in cur_kline_list]
@@ -63,5 +63,5 @@ for symbol in symbols:
         read_data = read_data[len(read_data) - KLINE_KEEP_COUNT:]
     read_data = [json.dumps(td) for td in read_data]
     if read_data:
-        r2.lpush(kline_key, *read_data)
+        r2.lpush(kline_key + ":test", *read_data)
         exit()
