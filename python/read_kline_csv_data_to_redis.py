@@ -7,7 +7,7 @@ import redis
 
 
 # 读取CSV文件
-if len(sys.argv[1]) > 1:
+if len(sys.argv) > 1:
     data_dir = sys.argv[1]
 else:
     data_dir = "data"
