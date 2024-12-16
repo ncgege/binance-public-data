@@ -64,6 +64,7 @@ for symbol in symbols:
     if len(read_data) + len(cur_kline_list) >= KLINE_KEEP_COUNT:
         read_data = read_data[:KLINE_KEEP_COUNT - len(cur_kline_list)]
     print('\n\n', read_data)
+    print(len(read_data))
     read_data = [json.dumps(td) for td in read_data]
     if read_data:
         r2.lpush(kline_key + ":test", *read_data)
